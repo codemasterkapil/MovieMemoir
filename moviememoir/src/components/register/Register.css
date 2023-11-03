@@ -1,0 +1,60 @@
+
+.container {
+    
+    background-image: url('../../assets/movie.jpg'); 
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    height:100vh;
+}
+.register-form{
+    border-radius: 8px;
+    padding: 20px 20px;
+    padding-right:40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width:50%;
+    height:50%;
+    background: rgba(255, 255, 255, 0.8);
+}
+.register-form h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    margin: 10px 0;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;;
+}
+
+.register-submit{
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.register-submit-btn{
+    text-align: center;
+}
+
+.register-submit:hover {
+    background-color: #0056b3;
+}
+
+.register-heading{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
