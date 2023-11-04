@@ -14,15 +14,20 @@
     font-size: 30px;
     font-weight: bold;
   }
-  
-  .nav-links a {
-    text-decoration: none;
-    color: #fff; 
-    font-size: 20px;
+
+  .logout-btn{
+    border: 1px solid #fff;
+    padding: 7px 20px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: inherit;
+    color: white;
   }
-  
-  .nav-links a:hover {
-    text-decoration: underline;
+
+  .logout-btn:hover {
+    background-color: #d79e43;
   }
   
   .greeting {
