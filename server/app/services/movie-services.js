@@ -34,10 +34,34 @@ export const findMovie = async (req, res) => {
     res.send(data);
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Error when getting all movies!"
+      message: err.message + "Error when getting all movies!"
     });
   }
 };
+
+export const getSingleMovie = async (req, res) => {
+  try {
+    const movieId = req.params.id;
+    const userId = req.userId; 
+
+    const data = await Movie.findOne({
+      where: { id: movieId, userId: userId },
+    });
+
+    if (data) {
+      res.send(data);
+    } else {
+      res.status(404).send({
+        message: "Movie not found!",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: "Error when getting a single movie: " + err.message,
+    });
+  }
+};
+
 
 // Update product by product id
 export const updateMovie = async (req, res) => {

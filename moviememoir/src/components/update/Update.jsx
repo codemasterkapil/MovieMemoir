@@ -1,18 +1,15 @@
 import { useState, useEffect } from 'react'
-import './Create.css';
+import './Update.css';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Create = () => {
+const Update = () => {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = window.sessionStorage.getItem('token');
-        if (token == null) {
-            navigate("/login");
-        }
-    }, [])
+    const [token, setToken] = useState('');
+    const [movieId, setMovieId] = useState(useParams().id);
+    const [error, setError] = useState('');
 
     const [formData, setFormData] = useState({
         name: '',
@@ -21,6 +18,49 @@ const Create = () => {
         rating: '',
         releaseDate: '',
     });
+
+    useEffect(() => {
+        const token = window.sessionStorage.getItem('token');
+        if (token == null) {
+            navigate("/login");
+        }
+    }, [])
+
+
+    useEffect(() => {
+
+        const setMovie = async () => {
+            try {
+                const token = window.sessionStorage.getItem('token');
+                if (token == null) {
+                    navigate('/login');
+                }
+                setToken(token);
+
+                const response = await axios.get(`http://localhost:8080/api/auth/getmovie/${movieId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+                console.log(response);
+
+                if (response.data) {
+                    const originalDate = response.data.releaseDate;
+                    const formattedDate = new Date(originalDate).toISOString().split('T')[0];
+                    setFormData({ ...response.data, releaseDate: formattedDate });
+                }
+
+
+            } catch (error) {
+                setError('sorry you cannot view and update this movie !!')
+                console.log(error, "error while calling get single movie api endpoint")
+            }
+        }
+        setMovie();
+
+    }, [])
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -38,26 +78,27 @@ const Create = () => {
     };
 
     const handleSubmit = async (e) => {
-        const token = window.sessionStorage.getItem('token');
+
         e.preventDefault();
         try {
             console.log(formData);
-            const response = await axios.post('http://localhost:8080/api/auth/addmovie', formData, {
+            const response = await axios.post(`http://localhost:8080/api/auth/update/${movieId}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
             navigate("/");
-            console.log(response);
+
         } catch (error) {
-            console.log(error, "error while calling create movies api endpoint")
+
+            console.log(error, "error while calling update movies api endpoint")
         }
     };
     return (
         <div className="form-container">
             <form onSubmit={handleSubmit}>
-                <h1>Add a Movie</h1>
+                <h1>Update Your Movie</h1>
                 <div className="form-group">
                     <label>Movie Name* : </label>
                     <input
@@ -104,9 +145,10 @@ const Create = () => {
                     />
                 </div>
                 <button className="create-submit-btn" type="submit">Submit</button>
+                <p className='error-p'>{error}</p>
             </form>
         </div>
     );
 }
 
-export default Create
+export default Update

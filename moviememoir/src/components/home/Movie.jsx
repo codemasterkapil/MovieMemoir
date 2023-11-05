@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { AiFillDelete } from 'react-icons/ai'
 import { BiEdit } from 'react-icons/bi'
-
+import {Link} from 'react-router-dom'
 
 const Movie = ({ id, token }) => {
 
@@ -28,7 +28,6 @@ const Movie = ({ id, token }) => {
   }, [token, flag])
 
   const deleteMovie = async (movieId) => {
-    console.log(movieId);
     try {
       const response = await axios.get(`http://localhost:8080/api/auth/delete/${movieId}`, {
         headers: {
@@ -73,7 +72,7 @@ const Movie = ({ id, token }) => {
             </td>
             <td>{formatDate(movie.releaseDate)}</td>
             <td>
-              <button className='iconsb'><BiEdit /></button>
+            <Link to={`/update/${movie.id}`}> <button className='iconsb'><BiEdit /></button></Link>
             </td>
             <td>
               <button className='iconsb' onClick={() => deleteMovie(movie.id)}><AiFillDelete /></button>
