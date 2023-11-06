@@ -39,6 +39,7 @@ export const findMovie = async (req, res) => {
   }
 };
 
+// Find the movie based on its movie id
 export const getSingleMovie = async (req, res) => {
   try {
     const movieId = req.params.id;
@@ -63,7 +64,7 @@ export const getSingleMovie = async (req, res) => {
 };
 
 
-// Update product by product id
+// Update movie by movie id
 export const updateMovie = async (req, res) => {
 
     const movieId = req.params.id;
