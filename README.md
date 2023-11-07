@@ -87,7 +87,7 @@ Contributions to MovieMemoir are welcome! If you have any ideas for improvements
 
 ## Demo Video
 
-[here is the link of the demo video]()
+[here is the link of the demo video](https://www.loom.com/share/406920d02b2f4d29a501635f7eaed531?sid=c509beb5-d11f-4101-adc0-bb12bbab28f1)
 
 ## Postman Collection Link
 
